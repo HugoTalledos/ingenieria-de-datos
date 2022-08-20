@@ -1,0 +1,24 @@
+30-12-19:  return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\u200b' in position 5213: character maps to <undefined>
+**************************************Solucion**********************************************************
+Remplazar
+open(out_file_name, mode='w+') as f: p
+POR
+open(out_file_name, mode='w+', encoding="utf-8") as f: p
+
+
+**************************************Error**********************************************************
+31-12-19: No funciona missing_titles = (el_tiempo[missing_titles_mask]['url']
+                     .str.extract(r' (?P<missing_titles>[^/]+)$')
+                     .applymap(lambda title: title.split('-'))
+                     .applymap(lambda title_word_list: ' '.join(title_word_list))
+                )
+	Expresión regular fallando
+
+**************************************Solucion**********************************************************
+missing_titles = (el_tiempo[missing_titles_mask]['url']
+                  .str.extract(r'(?P<missing_titles>[^\/]+)$')
+                  .applymap(lambda title: title.split('-'))
+                  .applymap(lambda title_word_list: ' '.join(title_word_list))
+                )
+Había un espacio en blanco en la expresión regular.
